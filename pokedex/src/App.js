@@ -14,11 +14,8 @@ function App() {
                     <Route path="/pokemon:id">
                         <PokemonDetails />
                     </Route>
-                    <Route path="/pokemon">
-                        <PokemonList />
-                    </Route>
                     <Route path="/">
-                        HomePage
+                        <PokemonList />
                     </Route>
                 </Switch>
             </BrowserRouter>
