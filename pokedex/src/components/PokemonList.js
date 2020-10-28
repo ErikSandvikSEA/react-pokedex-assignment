@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 // from files 
 import "../styles/PokemonList.css"
+import { SinglePokemon } from "../components"
 import { fetchBaseList } from "../state/actions"
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,13 @@ function PokemonList() {
         <div>
             <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={4}>
-                    <p>hey</p>
+                    {
+                        basePokemonList.map(pokemon => {
+                            return (
+                            <SinglePokemon item={pokemon}/>
+                            )
+                        })
+                    }
                 </Grid>
             </Container>
         </div>
