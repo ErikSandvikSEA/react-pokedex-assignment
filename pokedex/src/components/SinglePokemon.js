@@ -1,10 +1,10 @@
 import React from 'react'
 
 function SinglePokemon(props) {
-    const { item } = props
+    const { pokemon } = props
     return (
         <div>
-            {item.name}
+            {pokemon.name}
         </div>
     )
 }

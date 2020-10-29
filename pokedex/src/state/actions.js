@@ -12,16 +12,35 @@ export const FETCH_DETAILED_LIST_START = `FETCH_DETAILED_LIST_START`
 export const FETCH_DETAILED_LIST_SUCCESS = `FETCH_DETAILED_LIST_SUCCESS`
 export const FETCH_DETAILED_LIST_FAILURE = `FETCH_DETAILED_LIST_FAILURE`
 
-
-let baseList = []
-
-export const fetchBaseList = () => {
+export const fetchPokemonList = () => {
     return dispatch => {
         dispatch({ type: FETCH_BASE_LIST_START })
         axios
             .get(baseURL151)
             .then(res => {
-                baseList = res.data.results
+                const baseList = res.data.results
+                const detailedList = []
+                for(const pokemon of baseList){
+                    axios
+                        .get(`${baseURL}${pokemon.name}`)
+                        .then(res => {
+                            detailedList.push(res.data)
+                            if(detailedList.length === 151){
+                                dispatch({
+                                    type: FETCH_DETAILED_LIST_SUCCESS,
+                                    payload: detailedList
+                                })
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            dispatch({
+                                type: FETCH_DETAILED_LIST_FAILURE,
+                                payload: err
+                            })
+                        })
+                }
+
                 dispatch({
                     type: FETCH_BASE_LIST_SUCCESS,
                     payload: baseList
@@ -34,34 +53,6 @@ export const fetchBaseList = () => {
                     payload: err
                 })
             })
-    }
-}
-
-export const fetchPokemonDetail = () => {
-    const detailedList = []
-
-    return dispatch => {
-        dispatch({ type:  FETCH_DETAILED_LIST_START})
-        for(const pokemon of baseList){
-            axios
-                .get(`${baseURL}${pokemon.name}`)
-                .then(res => {
-                    detailedList.push(res.data)
-                    if(detailedList.length === 151){
-                        dispatch({
-                            type: FETCH_DETAILED_LIST_SUCCESS,
-                            payload: detailedList
-                        })
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                    dispatch({
-                        type: FETCH_DETAILED_LIST_FAILURE,
-                        payload: err
-                    })
-                })
-        }
     }
 }
 

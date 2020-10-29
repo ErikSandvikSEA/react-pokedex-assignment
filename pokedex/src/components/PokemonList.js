@@ -1,13 +1,13 @@
 // from packages
 import React, { useEffect } from 'react'
-import { Grid, Container } from '@material-ui/core'
+import { Grid, Container, CssBaseline } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
 
 // from files
 import '../styles/PokemonList.css'
 import { SinglePokemon } from '../components'
-import { fetchBaseList, fetchPokemonDetail } from '../state/actions'
+import { fetchPokemonList } from '../state/actions'
 
 const useStyles = makeStyles((theme) => ({
 	cardGrid: {
@@ -19,29 +19,28 @@ const useStyles = makeStyles((theme) => ({
 function PokemonList() {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const basePokemonList = useSelector((state) => state.basePokemonList)
 	const detailedPokemonList = useSelector((state) => state.detailedList)
 
-	useEffect(async () => {
-		dispatch(fetchBaseList())
-
-		if (basePokemonList.length === 151) {
-			dispatch(fetchPokemonDetail())
-		}
+	useEffect(() => {
+		dispatch(fetchPokemonList())
 	}, [])
 
+    // console.log(basePokemonList)
 	console.log(detailedPokemonList)
 
 	return (
-		<div>
-			<Container className={classes.cardGrid} maxWidth="md">
-				<Grid container spacing={4}>
-					{detailedPokemonList.map((pokemon) => {
-						return <SinglePokemon key={pokemon.id} item={pokemon} />
-					})}
-				</Grid>
-			</Container>
-		</div>
+		<>
+			<CssBaseline />
+			<main>
+				<Container className={classes.cardGrid} maxWidth="md">
+					<Grid container spacing={4}>
+						{detailedPokemonList.map((pokemon) => {
+							return <SinglePokemon key={pokemon.id} pokemon={pokemon} />
+						})}
+					</Grid>
+				</Container>
+			</main>
+		</>
 	)
 }
 
