@@ -12,6 +12,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 
+// from files 
+import { capitalizeFirstLetter } from "../constants/helpers"
+
 const useStyles = makeStyles(() => ({
 	card: {
 		height: '100%',
@@ -65,7 +68,7 @@ function SinglePokemon(props) {
 						component="h2"
 						onClick={viewDetails}
 					>
-						{pokemon.name}
+						{capitalizeFirstLetter(pokemon.name)}
 					</Typography>
 					<Typography gutterBottom variant="h6">
 						ID: {pokemon.id}
