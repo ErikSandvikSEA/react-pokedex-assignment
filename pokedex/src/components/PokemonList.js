@@ -21,9 +21,9 @@ function PokemonList() {
 	const dispatch = useDispatch()
 	const detailedPokemonList = useSelector((state) => state.detailedList)
 
-	useEffect(() => {
-		dispatch(fetchPokemonList())
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(fetchPokemonList())
+	// }, [])
 
 	return (
 		<>

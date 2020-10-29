@@ -12,6 +12,11 @@ export const FETCH_DETAILED_LIST_START = `FETCH_DETAILED_LIST_START`
 export const FETCH_DETAILED_LIST_SUCCESS = `FETCH_DETAILED_LIST_SUCCESS`
 export const FETCH_DETAILED_LIST_FAILURE = `FETCH_DETAILED_LIST_FAILURE`
 
+export const FETCH_SINGLE_POKEMON_START = `FETCH_SINGLE_POKEMON_START`
+export const FETCH_SINGLE_POKEMON_SUCCESS = `FETCH_SINGLE_POKEMON_SUCCESS`
+export const FETCH_SINGLE_POKEMON_FAILURE = `FETCH_SINGLE_POKEMON_FAILURE`
+
+
 export const fetchPokemonList = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_BASE_LIST_START })
@@ -58,4 +63,25 @@ export const fetchPokemonList = () => {
 				})
 			})
 	}
+}
+
+export const fetchSinglePokemon = (id) => {
+    return (dispatch) => {
+        dispatch({ type: FETCH_SINGLE_POKEMON_START })
+        axios
+            .get(`${baseURL}${id}`)
+            .then(res => {
+                dispatch({
+                    type: FETCH_SINGLE_POKEMON_SUCCESS,
+                    payload: res.data
+                })
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch({
+                    type: FETCH_SINGLE_POKEMON_FAILURE,
+                    payload: err
+                })
+            })
+    }
 }
