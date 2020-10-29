@@ -13,23 +13,18 @@ import Button from '@material-ui/core/Button'
 
 //from files
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	root: {
 		flexGrow: 1,
-		margin: '20%',
+        margin: '10% 5%',
 	},
-	paper: {
-		padding: theme.spacing(2),
-		margin: 'auto',
-		maxWidth: 500,
-	},
+
 	image: {
-		width: 128,
-		height: 128,
+		width: 250,
+		height: 250,
 	},
 	img: {
 		margin: 'auto',
-		display: 'block',
 		maxWidth: '100%',
 		maxHeight: '100%',
 	},
@@ -40,7 +35,17 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-	},
+    },
+    pokemonDetailsContainer: {
+        display: `flex`,
+        flexDirection: `column`,
+        alignItems: `center`
+    },
+    combatDetailsContainer: {
+        display: `flex`,
+        justifyContent: "space-evenly",
+        margin: "5% 0%"
+    }
 }))
 
 function PokemonDetails() {
@@ -48,42 +53,58 @@ function PokemonDetails() {
 	const { id } = useParams()
 	const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
-		return pokemon.id === parseInt(id)
-    })
-    
-    const RenderItems = () => {
-        if(filteredPokemon){
-            return(
-                <>
-                    <CssBaseline />
-                    <Container maxWidth="md">
-                        <div className={classes.root}>
-                            <Paper className={classes.paper}></Paper>
-                            <Grid container spacing={2}>
-                                <Grid item>
-                                    <ButtonBase className={classes.image}>
-                                        <img
-                                            className={classes.image}
-                                            alt={`${filteredPokemon.name} Image`}
-                                            src={
-                                                filteredPokemon.sprites.other["official-artwork"].front_default
-                                            }
-                                        />
-                                    </ButtonBase>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </Container>
-                </>
-            )
-        } else {
-            return <h1>Loading...</h1>
-        }
-    }
+		return pokemon.id === parseInt(id) || pokemon.name === id
+	})
 
-	return (
-        <RenderItems />    
-    )
+	const RenderItems = () => {
+		if (filteredPokemon) {
+			return (
+				<div className={classes.root}>
+					<CssBaseline />
+					<Container maxWidth="lg" className={classes.pokemonDetailsContainer}>
+						<img
+							className={classes.image}
+							alt={`${filteredPokemon.name} Image`}
+							src={
+								filteredPokemon.sprites.other['official-artwork']
+									.front_default
+							}
+						/>
+					</Container>
+					<Container maxWidth="lg"  className={classes.combatDetailsContainer}>
+						<div>
+							<h2>Moves</h2>
+                            {filteredPokemon.moves.map((singleMove, i) => {
+                                return (
+                                    <div key={i}>
+                                        <p>
+                                            {singleMove.move.name}
+                                        </p>
+                                    </div>
+                                )
+                            })}
+						</div>
+						<div>
+							<h2>Abilities</h2>
+                            {filteredPokemon.abilities.map((singleAbility, i) => {
+                                return (
+                                    <div key={i}>
+                                        <p>
+                                            {singleAbility.ability.name}
+                                        </p>
+                                    </div>
+                                )
+                            })}
+						</div>
+					</Container>
+				</div>
+			)
+		} else {
+			return <h1>Loading...</h1>
+		}
+	}
+
+	return <RenderItems />
 }
 
 export default PokemonDetails
