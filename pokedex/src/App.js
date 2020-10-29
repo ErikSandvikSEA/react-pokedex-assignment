@@ -11,7 +11,7 @@ function App() {
         <div>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/pokemon:id">
+                    <Route path="/pokemon/:id">
                         <PokemonDetails />
                     </Route>
                     <Route path="/">

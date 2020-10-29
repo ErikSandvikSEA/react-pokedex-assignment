@@ -25,9 +25,6 @@ function PokemonList() {
 		dispatch(fetchPokemonList())
 	}, [])
 
-    // console.log(basePokemonList)
-	console.log(detailedPokemonList)
-
 	return (
 		<>
 			<CssBaseline />
