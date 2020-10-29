@@ -26,6 +26,12 @@ export const fetchPokemonList = () => {
                         .then(res => {
                             detailedList.push(res.data)
                             if(detailedList.length === 151){
+
+                                detailedList.sort(function(a, b) { 
+                                    return a.id - b.id  ||  a.name.localeCompare(b.name);
+                                  });
+
+
                                 dispatch({
                                     type: FETCH_DETAILED_LIST_SUCCESS,
                                     payload: detailedList
