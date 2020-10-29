@@ -1,15 +1,18 @@
 // from packages
 import React from 'react'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
+import {
+	Card,
+	Button,
+	CardActions,
+	CardContent,
+	CardMedia,
+	Grid,
+	Typography,
+} from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	card: {
 		height: '100%',
 		display: 'flex',
@@ -31,13 +34,20 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		marginBottom: '2%',
-	},
+    },
+    nameHover: {
+        cursor: "pointer"
+    }
 }))
 
 function SinglePokemon(props) {
 	const { pokemon } = props
 	const classes = useStyles()
 	const history = useHistory()
+
+	const viewDetails = () => {
+		history.push(`/pokemon/${pokemon.id}`)
+	}
 
 	return (
 		<Grid item key={pokemon.id} xs={12} sm={6} md={4}>
@@ -47,16 +57,32 @@ function SinglePokemon(props) {
 					image={pokemon.sprites.front_default}
 					title={pokemon.name}
 				/>
-                <CardContent className={classes.cardContent}>
-                <Typography gutterBottom variant="h4" component="h2">
-                      {pokemon.name}
-                    </Typography>
-                    <Typography gutterBottom variant='h6'>
-                      ID: {pokemon.id}
-                    </Typography>
-                </CardContent>
+				<CardContent className={classes.cardContent}>
+					<Typography
+                        className={classes.nameHover}
+						gutterBottom
+						variant="h4"
+						component="h2"
+						onClick={viewDetails}
+					>
+						{pokemon.name}
+					</Typography>
+					<Typography gutterBottom variant="h6">
+						ID: {pokemon.id}
+					</Typography>
+				</CardContent>
+				<CardActions className={classes.cardActions}>
+					<Button
+						size="large"
+						color="secondary"
+						id={pokemon.id}
+						variant="contained"
+						onClick={viewDetails}
+					>
+						<span id={pokemon.id}>View Pokemon Details</span>
+					</Button>
+				</CardActions>
 			</Card>
-			{pokemon.name}
 		</Grid>
 	)
 }

@@ -5,16 +5,23 @@ import {
 	FETCH_BASE_LIST_SUCCESS,
 	FETCH_DETAILED_LIST_FAILURE,
 	FETCH_DETAILED_LIST_SUCCESS,
-	FETCH_DETAILED_LIST_START,
+    FETCH_DETAILED_LIST_START,
+    FETCH_SINGLE_POKEMON_FAILURE,
+    FETCH_SINGLE_POKEMON_START,
+    FETCH_SINGLE_POKEMON_SUCCESS
 } from './actions'
 
 //initialState
 const initialState = {
 	basePokemonList: [],
 	isFetching: false,
-	effor: false,
+	error: false,
 	errorMessage: '',
-	detailedList: [],
+    detailedList: [],
+    singlePokemon: {},
+    isFetchingSingle: false,
+    singleFetchError: false,
+    singleFetchErrorMessage: ``,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -62,7 +69,30 @@ export const reducer = (state = initialState, action) => {
 				isFetching: false,
 				error: true,
 				errorMessage: action.payload,
-			}
+            }
+        case FETCH_SINGLE_POKEMON_START:
+            return {
+                ...state,
+                isFetchingSingle: true,
+                singleFetchError: false,
+                singleFetchErrorMessage: ``,
+            }
+        case FETCH_SINGLE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                isFetchingSingle: false,
+                singleFetchError: false,
+                singleFetchErrorMessage: ``,
+                singlePokemon: action.payload,
+            }
+        case FETCH_SINGLE_POKEMON_FAILURE:
+            return {
+                ...state,
+                isFetchingSingle: false,
+                singleFetchError: true,
+                singleFetchErrorMessage: action.payload
+            }
+        
 		default:
 			return state
 	}
