@@ -1,5 +1,5 @@
 //from packages
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -54,7 +54,11 @@ function PokemonDetails() {
 	const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
 		return pokemon.id === parseInt(id) || pokemon.name === id
-	})
+    })
+    
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
 
 	const RenderItems = () => {
 		if (filteredPokemon) {

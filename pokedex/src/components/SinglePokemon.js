@@ -34,17 +34,20 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		justifyContent: 'center',
 		marginBottom: '2%',
-	},
+    },
+    nameHover: {
+        cursor: "pointer"
+    }
 }))
 
 function SinglePokemon(props) {
 	const { pokemon } = props
 	const classes = useStyles()
-    const history = useHistory()
-    
-    const viewDetails = e => {
-        history.push(`/pokemon/${pokemon.id}`)
-    }
+	const history = useHistory()
+
+	const viewDetails = () => {
+		history.push(`/pokemon/${pokemon.id}`)
+	}
 
 	return (
 		<Grid item key={pokemon.id} xs={12} sm={6} md={4}>
@@ -55,7 +58,13 @@ function SinglePokemon(props) {
 					title={pokemon.name}
 				/>
 				<CardContent className={classes.cardContent}>
-					<Typography gutterBottom variant="h4" component="h2">
+					<Typography
+                        className={classes.nameHover}
+						gutterBottom
+						variant="h4"
+						component="h2"
+						onClick={viewDetails}
+					>
 						{pokemon.name}
 					</Typography>
 					<Typography gutterBottom variant="h6">
