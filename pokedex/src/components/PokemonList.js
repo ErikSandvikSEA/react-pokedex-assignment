@@ -1,52 +1,48 @@
-// from packages 
+// from packages
 import React, { useEffect } from 'react'
 import { Grid, Container } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from "react-redux"
+import { makeStyles } from '@material-ui/core/styles'
+import { useSelector, useDispatch } from 'react-redux'
 
-// from files 
-import "../styles/PokemonList.css"
-import { SinglePokemon } from "../components"
-import { fetchBaseList, fetchPokemonDetail } from "../state/actions"
+// from files
+import '../styles/PokemonList.css'
+import { SinglePokemon } from '../components'
+import { fetchBaseList, fetchPokemonDetail } from '../state/actions'
 
 const useStyles = makeStyles((theme) => ({
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    }
-  }));
+	cardGrid: {
+		paddingTop: theme.spacing(8),
+		paddingBottom: theme.spacing(8),
+	},
+}))
 
 function PokemonList() {
-    const classes = useStyles()
-    const dispatch = useDispatch()
-    const basePokemonList = useSelector(state => state.basePokemonList)
-    const detailedPokemonList = useSelector(state => state.detailedList)
+	const classes = useStyles()
+	const dispatch = useDispatch()
+	const basePokemonList = useSelector((state) => state.basePokemonList)
+	const detailedPokemonList = useSelector((state) => state.detailedList)
 
-    useEffect(async () => {
-        dispatch(fetchBaseList())
+	useEffect(async () => {
+		dispatch(fetchBaseList())
 
-        if(basePokemonList.length === 151){
-            dispatch(fetchPokemonDetail())
-        }
-    }, [])
+		if (basePokemonList.length === 151) {
+			dispatch(fetchPokemonDetail())
+		}
+	}, [])
 
-    console.log(detailedPokemonList)
+	console.log(detailedPokemonList)
 
-    return (
-        <div>
-            <Container className={classes.cardGrid} maxWidth="md">
-                <Grid container spacing={4}>
-                    {
-                        basePokemonList.map(pokemon => {
-                            return (
-                            <SinglePokemon item={pokemon}/>
-                            )
-                        })
-                    }
-                </Grid>
-            </Container>
-        </div>
-    )
+	return (
+		<div>
+			<Container className={classes.cardGrid} maxWidth="md">
+				<Grid container spacing={4}>
+					{detailedPokemonList.map((pokemon) => {
+						return <SinglePokemon key={pokemon.id} item={pokemon} />
+					})}
+				</Grid>
+			</Container>
+		</div>
+	)
 }
 
 export default PokemonList
