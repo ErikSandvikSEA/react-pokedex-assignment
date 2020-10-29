@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 // from files 
 import "../styles/PokemonList.css"
 import { SinglePokemon } from "../components"
-import { fetchBaseList } from "../state/actions"
+import { fetchBaseList, fetchPokemonDetail } from "../state/actions"
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -20,10 +20,17 @@ function PokemonList() {
     const classes = useStyles()
     const dispatch = useDispatch()
     const basePokemonList = useSelector(state => state.basePokemonList)
+    const detailedPokemonList = useSelector(state => state.detailedList)
 
-    useEffect(() => {
+    useEffect(async () => {
         dispatch(fetchBaseList())
+
+        if(basePokemonList.length === 151){
+            dispatch(fetchPokemonDetail())
+        }
     }, [])
+
+    console.log(detailedPokemonList)
 
     return (
         <div>
