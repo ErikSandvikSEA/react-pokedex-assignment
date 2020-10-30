@@ -1,13 +1,11 @@
 // from packages
-import React, { useEffect } from 'react'
-import { Grid, Container, CssBaseline } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Grid, Container, CssBaseline, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // from files
-import '../styles/PokemonList.css'
 import { SinglePokemon } from '../components'
-import { fetchPokemonList } from '../state/actions'
 
 const useStyles = makeStyles((theme) => ({
 	cardGrid: {
@@ -18,20 +16,44 @@ const useStyles = makeStyles((theme) => ({
 
 function PokemonList() {
 	const classes = useStyles()
-	const dispatch = useDispatch()
 	const detailedPokemonList = useSelector((state) => state.detailedList)
+    const [searchFormValues, setSearchFormValues] = useState(``)
+    
+    const filteredList = detailedPokemonList.filter(pokemon => {
+        return pokemon.name.toLowerCase().includes(searchFormValues.toLocaleLowerCase())
+    })
 
-	// useEffect(() => {
-	// 	dispatch(fetchPokemonList())
-	// }, [])
+	const searchHandler = (e) => {
+		setSearchFormValues(e.target.value)
+	}
 
 	return (
 		<>
 			<CssBaseline />
 			<main>
+				<div className={classes.heroContent}>
+					<Container maxWidth="sm">
+						<Typography
+							component="h1"
+							variant="h2"
+							align="center"
+							color="textPrimary"
+							gutterBottom
+						>
+							Pokémon
+						</Typography>
+						<TextField
+							id="filled-basic"
+							label="Search"
+							variant="filled"
+							fullWidth
+							onChange={searchHandler}
+						/>
+					</Container>
+				</div>
 				<Container className={classes.cardGrid} maxWidth="md">
-					<Grid container spacing={4}>
-						{detailedPokemonList.map((pokemon) => {
+					<Grid container spacing={10}>
+						{filteredList.map((pokemon) => {
 							return <SinglePokemon key={pokemon.id} pokemon={pokemon} />
 						})}
 					</Grid>

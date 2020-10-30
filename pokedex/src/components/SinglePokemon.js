@@ -14,20 +14,28 @@ import { useHistory } from 'react-router-dom'
 
 // from files 
 import { capitalizeFirstLetter } from "../constants/helpers"
+import { primaryBlue, primaryYellow, primaryRed } from "../styles/appStyles"
 
 const useStyles = makeStyles(() => ({
+    button: {
+        background: primaryBlue,
+        fontWeight: `bold`,
+        color: `white`,
+        textTransform: `capitalize`
+    },
 	card: {
 		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'center',
+        justifyContent: 'center',
+        // border: `3px solid ${primaryBlue}`
 	},
 	cardMedia: {
-		paddingTop: '56.25%', // 16:9
+		paddingTop: '100%', // 16:9
 		boxShadow: '0 4px 12px 0px rgba(0,0,0,.25)',
-		width: '98%',
-		border: '1px',
+		width: '100%',
+		border: `5px solid ${primaryYellow}`,
 		borderRadius: '5px',
 	},
 	cardContent: {
@@ -76,13 +84,13 @@ function SinglePokemon(props) {
 				</CardContent>
 				<CardActions className={classes.cardActions}>
 					<Button
-						size="large"
-						color="secondary"
+                        className={classes.button}
+						size="medium"
 						id={pokemon.id}
 						variant="contained"
 						onClick={viewDetails}
 					>
-						<span id={pokemon.id}>View Pokemon Details</span>
+						<span id={pokemon.id}>View Pokémon Details</span>
 					</Button>
 				</CardActions>
 			</Card>

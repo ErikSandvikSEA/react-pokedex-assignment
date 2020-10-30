@@ -20,6 +20,9 @@ const useStyles = makeStyles(() => ({
 	root: {
 		flexGrow: 1,
         margin: '10% 5%',
+        display: `flex`,
+        flexDirection: "column",
+        alignItems: "center"
 	},
 
 	image: {
@@ -47,7 +50,7 @@ const useStyles = makeStyles(() => ({
     combatDetailsContainer: {
         display: `flex`,
         justifyContent: "space-evenly",
-        margin: "5% 0%"
+        margin: "5% 0%",
     },
     typeContainer: {
         display: `flex`,
@@ -92,6 +95,7 @@ function PokemonDetails() {
 							}
 						/>
                         <h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
+                        <h4>ID# {filteredPokemon.id}</h4>
                         <div className={classes.typeContainer}>
                             {filteredPokemon.types.map((singleType, idx) => {
                                 return (
@@ -101,6 +105,8 @@ function PokemonDetails() {
                                 )
                             })}
                         </div>
+                        <h5>Height: {filteredPokemon.height}</h5>
+                        <h5>Weight: {filteredPokemon.weight}</h5>
 					</Container>
 					<Container maxWidth="lg"  className={classes.combatDetailsContainer}>
 						<div>
