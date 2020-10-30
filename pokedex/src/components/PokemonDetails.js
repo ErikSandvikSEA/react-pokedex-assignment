@@ -3,17 +3,13 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Button from '@material-ui/core/Button'
+
 
 //from files
 import { capitalizeFirstLetter } from "../constants/helpers"
-import { primaryBlue, primaryRed, primaryYellow } from "../styles/appStyles"
+import { primaryBlue, primaryYellow } from "../styles/appStyles"
 
 
 const useStyles = makeStyles(() => ({
@@ -88,7 +84,7 @@ function PokemonDetails() {
 					<Container maxWidth="lg" className={classes.pokemonDetailsContainer}>
 						<img
 							className={classes.image}
-							alt={`${filteredPokemon.name} Image`}
+							alt={`${filteredPokemon.name}`}
 							src={
 								filteredPokemon.sprites.other['official-artwork']
 									.front_default

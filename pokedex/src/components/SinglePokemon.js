@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom'
 
 // from files 
 import { capitalizeFirstLetter } from "../constants/helpers"
-import { primaryBlue, primaryYellow, primaryRed } from "../styles/appStyles"
+import { primaryBlue, primaryYellow } from "../styles/appStyles"
 
 const useStyles = makeStyles(() => ({
     button: {
