@@ -1,10 +1,11 @@
 // from packages
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 
 // from files
+import "./styles/App.css"
 import { PokemonList, PokemonDetails } from './components'
 import { fetchPokemonList } from './state/actions'
 
@@ -17,7 +18,7 @@ function App() {
 
 
     return (
-        <div>
+        <div className="app">
             <BrowserRouter>
                 <Switch>
                     <Route path="/pokemon/:id">

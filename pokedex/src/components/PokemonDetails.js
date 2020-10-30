@@ -12,11 +12,17 @@ import ButtonBase from '@material-ui/core/ButtonBase'
 import Button from '@material-ui/core/Button'
 
 //from files
+import { capitalizeFirstLetter } from "../constants/helpers"
+import { primaryBlue, primaryRed, primaryYellow } from "../styles/appStyles"
+
 
 const useStyles = makeStyles(() => ({
 	root: {
 		flexGrow: 1,
         margin: '10% 5%',
+        display: `flex`,
+        flexDirection: "column",
+        alignItems: "center"
 	},
 
 	image: {
@@ -44,7 +50,21 @@ const useStyles = makeStyles(() => ({
     combatDetailsContainer: {
         display: `flex`,
         justifyContent: "space-evenly",
-        margin: "5% 0%"
+        margin: "5% 0%",
+    },
+    typeContainer: {
+        display: `flex`,
+        flexDirection: `row`,
+        justifyContent: `space-evenly`,
+        margin: `2%`
+    },
+    typesBox: {
+        margin: `2%`,
+        padding: `5% 10%`,
+        border: `3px solid ${primaryBlue}`,
+        borderRadius: `5px`,
+        background: primaryYellow
+
     }
 }))
 
@@ -74,6 +94,19 @@ function PokemonDetails() {
 									.front_default
 							}
 						/>
+                        <h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
+                        <h4>ID# {filteredPokemon.id}</h4>
+                        <div className={classes.typeContainer}>
+                            {filteredPokemon.types.map((singleType, idx) => {
+                                return (
+                                    <div key={idx} className={classes.typesBox}>
+                                        <span>{capitalizeFirstLetter(singleType.type.name)}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <h5>Height: {filteredPokemon.height}</h5>
+                        <h5>Weight: {filteredPokemon.weight}</h5>
 					</Container>
 					<Container maxWidth="lg"  className={classes.combatDetailsContainer}>
 						<div>
@@ -82,7 +115,7 @@ function PokemonDetails() {
                                 return (
                                     <div key={i}>
                                         <p>
-                                            {singleMove.move.name}
+                                            {capitalizeFirstLetter(singleMove.move.name)}
                                         </p>
                                     </div>
                                 )
@@ -94,7 +127,7 @@ function PokemonDetails() {
                                 return (
                                     <div key={i}>
                                         <p>
-                                            {singleAbility.ability.name}
+                                            {capitalizeFirstLetter(singleAbility.ability.name)}
                                         </p>
                                     </div>
                                 )
