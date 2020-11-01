@@ -21,12 +21,11 @@
 	border-radius: 15px;
 }
 
-,
 ul.no-bullets {
 	list-style-type: none;
 	padding: 0; /* Remove padding */
 	margin: 0; /* Remove margins */
-	width: 100%;
+	width: 80%;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
