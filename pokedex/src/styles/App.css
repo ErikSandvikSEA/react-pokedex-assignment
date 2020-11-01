@@ -1,4 +1,41 @@
-.app {
+.root {
+	background-color: #ff2116;
+	margin-top: 0;
+	padding: 2%;
+}
+.pokemon__list {
+	margin: auto;
+	margin-top: 2%;
 	font-family: calibri;
-	border: 1px solid black;
+	border: 5px solid #ffca00;
+	border-radius: 10px;
+	max-width: 800px;
+	padding: 5% 5%;
+	background-color: whitesmoke;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	max-height: 700px;
+}
+
+/* width */
+.pokemon__list::-webkit-scrollbar {
+	width: 10px;
+	border-radius: 10px;
+}
+
+/* Track */
+.pokemon__list::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+.pokemon__list::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+.pokemon__list::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }

@@ -1,0 +1,49 @@
+.moves-abilities__container {
+	display: flex;
+	flex-direction: column;
+	margin: 5%;
+	flex: 0.4;
+	max-height: 300px;
+	border-radius: 5px;
+	border: 3px solid #ffca00;
+	background: rgb(255, 253, 229);
+	width: 20%;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	align-items: center;
+}
+
+.combatDetailsContainer {
+	display: flex;
+	justify-content: space-evenly;
+	background: #ffeca2;
+	border-radius: 15px;
+}
+
+,
+ul.no-bullets {
+	list-style-type: none;
+	padding: 0; /* Remove padding */
+	margin: 0; /* Remove margins */
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+li.no-bullets {
+	display: flex;
+	justify-content: center;
+	background-color: #83a7c2;
+	width: 100%;
+	margin: 2% 0%;
+	padding: 1% 0%;
+	border-radius: 8px;
+	font-weight: 600;
+}
+
+.moves-abilities__container::-webkit-scrollbar {
+	display: none;
+}

@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 
 // from files 
 import App from './App';
+import "./styles/App.css"
 
 import { reducer } from './state/reducers'
 
@@ -20,7 +21,10 @@ const store = createStore(reducer, applyMiddleware(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <div className="root">
+
       <App />
+      </div>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

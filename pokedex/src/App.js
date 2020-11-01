@@ -3,34 +3,37 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-
 // from files
-import "./styles/App.css"
+import './styles/App.css'
 import { PokemonList, PokemonDetails } from './components'
 import { fetchPokemonList } from './state/actions'
 
 function App() {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(fetchPokemonList())
-    }, [])
+	useEffect(() => {
+		dispatch(fetchPokemonList())
+	}, [])
 
+	return (
+		<div className="root">
+			<div className="app">
+				<BrowserRouter>
+					<Switch>
+						<Route path="/:id">
+							<PokemonDetails />
+						</Route>
+						<Route path="/">
+                            <div className="pokemon__list">
 
-    return (
-        <div className="app">
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/pokemon/:id">
-                        <PokemonDetails />
-                    </Route>
-                    <Route path="/">
-                        <PokemonList />
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </div>
-    )
+							<PokemonList />
+                            </div>
+						</Route>
+					</Switch>
+				</BrowserRouter>
+			</div>
+		</div>
+	)
 }
 
 export default App
