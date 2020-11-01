@@ -24,7 +24,9 @@ function PokemonList() {
     })
 
 	const searchHandler = (e) => {
-		setSearchFormValues(e.target.value)
+		setTimeout(() => {
+			setSearchFormValues(e.target.value)
+		}, 300)
 	}
 
 	return (

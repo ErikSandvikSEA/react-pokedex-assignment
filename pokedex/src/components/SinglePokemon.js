@@ -57,7 +57,7 @@ function SinglePokemon(props) {
 	const history = useHistory()
 
 	const viewDetails = () => {
-		history.push(`/pokemon/${pokemon.id}`)
+		history.push(`/${pokemon.id}`)
 	}
 
 	return (

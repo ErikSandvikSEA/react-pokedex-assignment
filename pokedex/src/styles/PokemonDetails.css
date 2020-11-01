@@ -14,6 +14,14 @@
 	align-items: center;
 }
 
+.combatDetailsContainer {
+	display: flex;
+	justify-content: space-evenly;
+	background: #ffeca2;
+	border-radius: 15px;
+}
+
+,
 ul.no-bullets {
 	list-style-type: none;
 	padding: 0; /* Remove padding */
@@ -29,11 +37,11 @@ li.no-bullets {
 	display: flex;
 	justify-content: center;
 	background-color: #83a7c2;
-	width: 60%;
+	width: 100%;
 	margin: 2% 0%;
 	padding: 1% 0%;
 	border-radius: 8px;
-	font-weight: 800;
+	font-weight: 600;
 }
 
 .moves-abilities__container::-webkit-scrollbar {
