@@ -6,19 +6,23 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 
-
 //from files
-import { capitalizeFirstLetter } from "../constants/helpers"
-import { primaryBlue, primaryYellow, backgroundRed, backgroundYellow } from "../styles/appStyles"
-
+import { capitalizeFirstLetter } from '../constants/helpers'
+import {
+	primaryBlue,
+	primaryYellow,
+	backgroundRed,
+	backgroundYellow,
+} from '../styles/appStyles'
+import '../styles/PokemonDetails.css'
 
 const useStyles = makeStyles(() => ({
 	root: {
 		flexGrow: 1,
-        margin: '10% 5%',
-        display: `flex`,
-        flexDirection: "column",
-        alignItems: "center"
+		margin: '10% 5%',
+		display: `flex`,
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 
 	image: {
@@ -37,33 +41,33 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-    },
-    pokemonDetailsContainer: {
-        display: `flex`,
-        flexDirection: `column`,
-        alignItems: `center`,
-        background: backgroundRed,
-    },
-    combatDetailsContainer: {
-        display: `flex`,
-        justifyContent: "space-evenly",
-        // margin: "5% 0%",
-        background: backgroundYellow
-    },
-    typeContainer: {
-        display: `flex`,
-        flexDirection: `row`,
-        justifyContent: `space-evenly`,
-        margin: `2%`
-    },
-    typesBox: {
-        margin: `2%`,
-        padding: `5% 10%`,
-        border: `3px solid ${primaryBlue}`,
-        borderRadius: `5px`,
-        background: primaryYellow
-
-    }
+	},
+	pokemonDetailsContainer: {
+		display: `flex`,
+		flexDirection: `column`,
+		alignItems: `center`,
+		background: backgroundRed,
+		borderRadius: `15px`,
+	},
+	combatDetailsContainer: {
+		display: `flex`,
+		justifyContent: 'space-evenly',
+		background: backgroundYellow,
+		borderRadius: `15px`,
+	},
+	typeContainer: {
+		display: `flex`,
+		flexDirection: `row`,
+		justifyContent: `space-evenly`,
+		margin: `2%`,
+	},
+	typesBox: {
+		margin: `2%`,
+		padding: `5% 10%`,
+		border: `3px solid ${primaryBlue}`,
+		borderRadius: `5px`,
+		background: primaryYellow,
+	},
 }))
 
 function PokemonDetails() {
@@ -72,18 +76,21 @@ function PokemonDetails() {
 	const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
 		return pokemon.id === parseInt(id) || pokemon.name === id
-    })
-    
-    useEffect(() => {
-        window.scrollTo(0,0)
-    }, [])
+	})
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
 
 	const RenderItems = () => {
 		if (filteredPokemon) {
 			return (
 				<div className={classes.root}>
 					<CssBaseline />
-					<Container maxWidth="lg" className={classes.pokemonDetailsContainer}>
+					<Container
+						maxWidth="lg"
+						className={classes.pokemonDetailsContainer}
+					>
 						<img
 							className={classes.image}
 							alt={`${filteredPokemon.name}`}
@@ -92,44 +99,51 @@ function PokemonDetails() {
 									.front_default
 							}
 						/>
-                        <h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
-                        <h4>ID# {filteredPokemon.id}</h4>
-                        <div className={classes.typeContainer}>
-                            {filteredPokemon.types.map((singleType, idx) => {
-                                return (
-                                    <div key={idx} className={classes.typesBox}>
-                                        <span>{capitalizeFirstLetter(singleType.type.name)}</span>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        <h5>Height: {filteredPokemon.height}</h5>
-                        <h5>Weight: {filteredPokemon.weight}</h5>
-					</Container>
-					<Container maxWidth="lg"  className={classes.combatDetailsContainer}>
-						<div>
-							<h2>Moves</h2>
-                            {filteredPokemon.moves.map((singleMove, i) => {
-                                return (
-                                    <div key={i}>
-                                        <p>
-                                            {capitalizeFirstLetter(singleMove.move.name)}
-                                        </p>
-                                    </div>
-                                )
-                            })}
+						<h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
+						<h4>ID# {filteredPokemon.id}</h4>
+						<div className={classes.typeContainer}>
+							{filteredPokemon.types.map((singleType, idx) => {
+								return (
+									<div key={idx} className={classes.typesBox}>
+										<span>
+											{capitalizeFirstLetter(singleType.type.name)}
+										</span>
+									</div>
+								)
+							})}
 						</div>
-						<div>
-							<h2>Abilities</h2>
-                            {filteredPokemon.abilities.map((singleAbility, i) => {
-                                return (
-                                    <div key={i}>
-                                        <p>
-                                            {capitalizeFirstLetter(singleAbility.ability.name)}
-                                        </p>
-                                    </div>
-                                )
-                            })}
+						<h5>Height: {filteredPokemon.height}</h5>
+						<h5>Weight: {filteredPokemon.weight}</h5>
+					</Container>
+					<Container
+						maxWidth="lg"
+						className={classes.combatDetailsContainer}
+					>
+						<div className="moves-abilities__container">
+                        <h2>Moves {`(${filteredPokemon.moves.length})`}</h2>
+							<ul className="no-bullets">
+								{filteredPokemon.moves.map((singleMove, i) => {
+									return (
+										<li key={i} className="no-bullets">
+											{capitalizeFirstLetter(singleMove.move.name)}
+										</li>
+									)
+								})}
+							</ul>
+						</div>
+						<div className="moves-abilities__container">
+							<h2>Abilities {`(${filteredPokemon.abilities.length})`}</h2>
+							<ul className="no-bullets">
+								{filteredPokemon.abilities.map((singleAbility, i) => {
+									return (
+										<li key={i} className="no-bullets">
+											{capitalizeFirstLetter(
+												singleAbility.ability.name
+											)}
+										</li>
+									)
+								})}
+							</ul>
 						</div>
 					</Container>
 				</div>
