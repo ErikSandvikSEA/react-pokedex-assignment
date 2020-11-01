@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 //from files
 import { capitalizeFirstLetter } from "../constants/helpers"
-import { primaryBlue, primaryYellow } from "../styles/appStyles"
+import { primaryBlue, primaryYellow, backgroundRed, backgroundYellow } from "../styles/appStyles"
 
 
 const useStyles = makeStyles(() => ({
@@ -41,12 +41,14 @@ const useStyles = makeStyles(() => ({
     pokemonDetailsContainer: {
         display: `flex`,
         flexDirection: `column`,
-        alignItems: `center`
+        alignItems: `center`,
+        background: backgroundRed,
     },
     combatDetailsContainer: {
         display: `flex`,
         justifyContent: "space-evenly",
-        margin: "5% 0%",
+        // margin: "5% 0%",
+        background: backgroundYellow
     },
     typeContainer: {
         display: `flex`,
