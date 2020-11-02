@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 // from files
 import { SinglePokemon } from '../components'
+import pokemonLogo from "../styles/images/Pokemon-Logo.png"
 
 const useStyles = makeStyles((theme) => ({
 	cardGrid: {
@@ -36,16 +37,9 @@ function PokemonList() {
 			<CssBaseline />
 			<main>
 				<div className={classes.heroContent}>
-					<Container maxWidth="sm">
-						<Typography
-							component="h1"
-							variant="h2"
-							align="center"
-							color="textPrimary"
-							gutterBottom
-						>
-							Pokémon
-						</Typography>
+					<Container maxWidth="md">
+						
+						<img src={pokemonLogo} width="100%"/>
 						<TextField
 							id="filled-basic"
 							label="Search"
