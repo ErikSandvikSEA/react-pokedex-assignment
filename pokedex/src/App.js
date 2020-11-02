@@ -9,11 +9,15 @@ import { PokemonList, PokemonDetails } from './components'
 import { fetchPokemonList } from './state/actions'
 
 function App() {
-	const dispatch = useDispatch()
-
+    const dispatch = useDispatch()
+    
+    
 	useEffect(() => {
-		dispatch(fetchPokemonList())
-	}, [])
+        function debounceDispatch(){
+            dispatch(fetchPokemonList())
+        }
+        debounceDispatch()
+	}, [dispatch])
 
 	return (
 		<div className="root">

@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
 		borderRadius: '5px',
 	},
 	cardContent: {
-		flexGrow: 1,
+		// flexGrow: 1,
 	},
 	cardActions: {
 		display: 'flex',
@@ -71,15 +71,14 @@ function SinglePokemon(props) {
 				<CardContent className={classes.cardContent}>
 					<Typography
                         className={classes.nameHover}
-						gutterBottom
-						variant="h4"
+						variant="h6"
 						component="h2"
 						onClick={viewDetails}
 					>
 						{capitalizeFirstLetter(pokemon.name)}
 					</Typography>
-					<Typography gutterBottom variant="h6">
-						ID: {pokemon.id}
+					<Typography variant="subtitle1">
+						ID# {pokemon.id}
 					</Typography>
 				</CardContent>
 				<CardActions className={classes.cardActions}>
