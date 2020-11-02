@@ -1,6 +1,6 @@
 // from packages
 import React, { useState } from 'react'
-import { Grid, Container, CssBaseline, Typography, TextField } from '@material-ui/core'
+import { Grid, Container, CssBaseline, Typography, TextField, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
 
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 function PokemonList() {
 	const classes = useStyles()
 	const detailedPokemonList = useSelector((state) => state.detailedList)
+	const isFetching = useSelector(state => state.isFetching)
     const [searchFormValues, setSearchFormValues] = useState(``)
     
     const filteredList = detailedPokemonList.filter(pokemon => {
@@ -30,6 +31,7 @@ function PokemonList() {
 	}
 
 	return (
+		isFetching ? <CircularProgress /> :
 		<>
 			<CssBaseline />
 			<main>

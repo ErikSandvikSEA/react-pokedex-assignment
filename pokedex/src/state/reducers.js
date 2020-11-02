@@ -36,7 +36,6 @@ export const reducer = (state = initialState, action) => {
 		case FETCH_BASE_LIST_SUCCESS:
 			return {
 				...state,
-				isFetching: false,
 				error: false,
 				errorMessage: '',
 				basePokemonList: action.payload,

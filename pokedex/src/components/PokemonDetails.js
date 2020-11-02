@@ -73,7 +73,7 @@ const useStyles = makeStyles(() => ({
 function PokemonDetails() {
 	const classes = useStyles()
 	const { id } = useParams()
-	const detailedList = useSelector((state) => state.detailedList)
+    const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
 		return pokemon.id === parseInt(id) || pokemon.name === id
 	})
