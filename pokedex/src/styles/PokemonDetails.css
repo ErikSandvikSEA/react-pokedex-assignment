@@ -30,6 +30,7 @@
 	color: #0269b6;
 	font-weight: bold;
 	margin-bottom: 20px;
+	cursor: pointer;
 }
 
 .view-details_button {
@@ -40,6 +41,7 @@
 	color: #0269b6;
 	font-weight: bold;
 	margin-bottom: 20px;
+	cursor: pointer;
 }
 
 .logo {
@@ -120,6 +122,7 @@ li.no-bullets {
 		border: none;
 		border-radius: none;
 		font-weight: 600;
+		height: 10px;
 	}
 
 	.moves-abilities__container {
