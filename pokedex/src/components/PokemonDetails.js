@@ -8,13 +8,9 @@ import { makeStyles } from '@material-ui/core/styles'
 
 //from files
 import { capitalizeFirstLetter } from '../constants/helpers'
-import {
-	primaryBlue,
-	primaryYellow,
-	backgroundRed,
-	backgroundYellow,
-} from '../styles/appStyles'
+import { primaryBlue, primaryYellow } from '../styles/appStyles'
 import '../styles/PokemonDetails.css'
+import pokemonLogo from '../styles/images/Pokemon-Logo.png'
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -46,14 +42,9 @@ const useStyles = makeStyles(() => ({
 		display: `flex`,
 		flexDirection: `column`,
 		alignItems: `center`,
-		background: backgroundRed,
-		borderRadius: `15px`,
-	},
-	combatDetailsContainer: {
-		display: `flex`,
-		justifyContent: 'space-evenly',
-		background: backgroundYellow,
-		borderRadius: `15px`,
+		background: `white`,
+		border: `5px solid #ffca00`,
+		borderRadius: `10px`,
 	},
 	typeContainer: {
 		display: `flex`,
@@ -73,7 +64,7 @@ const useStyles = makeStyles(() => ({
 function PokemonDetails() {
 	const classes = useStyles()
 	const { id } = useParams()
-    const detailedList = useSelector((state) => state.detailedList)
+	const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
 		return pokemon.id === parseInt(id) || pokemon.name === id
 	})
@@ -91,6 +82,7 @@ function PokemonDetails() {
 						maxWidth="lg"
 						className={classes.pokemonDetailsContainer}
 					>
+						<img className="logo" src={pokemonLogo} alt="main logo" />
 						<img
 							className={classes.image}
 							alt={`${filteredPokemon.name}`}
@@ -99,47 +91,70 @@ function PokemonDetails() {
 									.front_default
 							}
 						/>
-						<h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
-						<h4>ID# {filteredPokemon.id}</h4>
-						<div className={classes.typeContainer}>
-							{filteredPokemon.types.map((singleType, idx) => {
-								return (
-									<div key={idx} className={classes.typesBox}>
-										<span>
-											{capitalizeFirstLetter(singleType.type.name)}
-										</span>
-									</div>
-								)
-							})}
+						<div className="details_container">
+							<h1>{capitalizeFirstLetter(filteredPokemon.name)}</h1>
+							<h4>ID# {filteredPokemon.id}</h4>
+							<div className={classes.typeContainer}>
+								{filteredPokemon.types.map((singleType, idx) => {
+									return (
+										<div key={idx} className={classes.typesBox}>
+											<span>
+												{capitalizeFirstLetter(
+													singleType.type.name
+												)}
+											</span>
+										</div>
+									)
+								})}
+							</div>
+							<h5>Height: {filteredPokemon.height}</h5>
+							<h5>Weight: {filteredPokemon.weight}</h5>
 						</div>
-						<h5>Height: {filteredPokemon.height}</h5>
-						<h5>Weight: {filteredPokemon.weight}</h5>
 					</Container>
-					<Container
-						maxWidth="lg"
-						className={classes.combatDetailsContainer}
-					>
+					<Container maxWidth="lg" className="combatDetailsContainer">
 						<div className="moves-abilities__container">
-                        <h2>Moves {`(${filteredPokemon.moves.length})`}</h2>
+							<h2>Moves {`(${filteredPokemon.moves.length})`}</h2>
 							<ul className="no-bullets">
 								{filteredPokemon.moves.map((singleMove, i) => {
 									return (
 										<li key={i} className="no-bullets">
-											{capitalizeFirstLetter(singleMove.move.name)}
+											<a
+												className="no-decoration"
+												target="_blank"
+												rel="noreferrer"
+												href={`https://bulbapedia.bulbagarden.net/wiki/${capitalizeFirstLetter(
+													singleMove.move.name
+												).replace('-', '_')}_(move)`}
+											>
+												{capitalizeFirstLetter(
+													singleMove.move.name
+												)}
+											</a>
 										</li>
 									)
 								})}
 							</ul>
 						</div>
 						<div className="moves-abilities__container">
-							<h2>Abilities {`(${filteredPokemon.abilities.length})`}</h2>
+							<h2>
+								Abilities {`(${filteredPokemon.abilities.length})`}
+							</h2>
 							<ul className="no-bullets">
 								{filteredPokemon.abilities.map((singleAbility, i) => {
 									return (
 										<li key={i} className="no-bullets">
-											{capitalizeFirstLetter(
-												singleAbility.ability.name
-											)}
+											<a
+												className="no-decoration"
+												target="_blank"
+												rel="noreferrer"
+												href={`https://bulbapedia.bulbagarden.net/wiki/${capitalizeFirstLetter(
+													singleAbility.ability.name
+												).replace('-', '_')}_(Ability)`}
+											>
+												{capitalizeFirstLetter(
+													singleAbility.ability.name
+												)}
+											</a>
 										</li>
 									)
 								})}

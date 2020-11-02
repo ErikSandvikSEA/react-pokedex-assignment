@@ -1,12 +1,18 @@
 // from packages
 import React, { useState } from 'react'
-import { Grid, Container, CssBaseline, Typography, TextField, CircularProgress } from '@material-ui/core'
+import {
+	Grid,
+	Container,
+	CssBaseline,
+	TextField,
+	CircularProgress,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
 
 // from files
 import { SinglePokemon } from '../components'
-import pokemonLogo from "../styles/images/Pokemon-Logo.png"
+import pokemonLogo from '../styles/images/Pokemon-Logo.png'
 
 const useStyles = makeStyles((theme) => ({
 	cardGrid: {
@@ -18,12 +24,14 @@ const useStyles = makeStyles((theme) => ({
 function PokemonList() {
 	const classes = useStyles()
 	const detailedPokemonList = useSelector((state) => state.detailedList)
-	const isFetching = useSelector(state => state.isFetching)
-    const [searchFormValues, setSearchFormValues] = useState(``)
-    
-    const filteredList = detailedPokemonList.filter(pokemon => {
-        return pokemon.name.toLowerCase().includes(searchFormValues.toLocaleLowerCase())
-    })
+	const isFetching = useSelector((state) => state.isFetching)
+	const [searchFormValues, setSearchFormValues] = useState(``)
+
+	const filteredList = detailedPokemonList.filter((pokemon) => {
+		return pokemon.name
+			.toLowerCase()
+			.includes(searchFormValues.toLocaleLowerCase())
+	})
 
 	const searchHandler = (e) => {
 		setTimeout(() => {
@@ -31,15 +39,19 @@ function PokemonList() {
 		}, 300)
 	}
 
-	return (
-		isFetching ? <CircularProgress /> :
+	return isFetching ? (
+		<CircularProgress />
+	) : (
 		<>
 			<CssBaseline />
 			<main>
 				<div className={classes.heroContent}>
 					<Container maxWidth="md">
-						
-						<img src={pokemonLogo} width="100%"/>
+						<img
+							src={pokemonLogo}
+							width="100%"
+							alt="pokemon main title"
+						/>
 						<TextField
 							id="filled-basic"
 							label="Search"
@@ -50,7 +62,7 @@ function PokemonList() {
 					</Container>
 				</div>
 				<Container className={classes.cardGrid} maxWidth="md">
-					<Grid container spacing={10}>
+					<Grid container spacing={5}>
 						{filteredList.map((pokemon) => {
 							return <SinglePokemon key={pokemon.id} pokemon={pokemon} />
 						})}
