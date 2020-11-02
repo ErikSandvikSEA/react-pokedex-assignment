@@ -2,7 +2,6 @@
 import React from 'react'
 import {
 	Card,
-	Button,
 	CardActions,
 	CardContent,
 	CardMedia,
@@ -14,22 +13,16 @@ import { useHistory } from 'react-router-dom'
 
 // from files 
 import { capitalizeFirstLetter } from "../constants/helpers"
-import { primaryBlue, primaryYellow } from "../styles/appStyles"
+import { primaryYellow } from "../styles/appStyles"
+import "../styles/PokemonDetails.css"
 
 const useStyles = makeStyles(() => ({
-    button: {
-        background: primaryBlue,
-        fontWeight: `bold`,
-        color: `white`,
-        textTransform: `capitalize`
-    },
 	card: {
 		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
         justifyContent: 'center',
-        // border: `3px solid ${primaryBlue}`
 	},
 	cardMedia: {
 		paddingTop: '100%', // 16:9
@@ -37,9 +30,6 @@ const useStyles = makeStyles(() => ({
 		width: '100%',
 		border: `5px solid ${primaryYellow}`,
 		borderRadius: '5px',
-	},
-	cardContent: {
-		// flexGrow: 1,
 	},
 	cardActions: {
 		display: 'flex',
@@ -82,15 +72,13 @@ function SinglePokemon(props) {
 					</Typography>
 				</CardContent>
 				<CardActions className={classes.cardActions}>
-					<Button
-                        className={classes.button}
-						size="medium"
+					<button
+                        className="view-details_button"
 						id={pokemon.id}
-						variant="contained"
 						onClick={viewDetails}
 					>
 						<span id={pokemon.id}>View Pokémon Details</span>
-					</Button>
+					</button>
 				</CardActions>
 			</Card>
 		</Grid>
