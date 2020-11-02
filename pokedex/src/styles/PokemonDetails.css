@@ -12,12 +12,24 @@
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 	align-items: center;
+	color: #0269b6;
 }
 
 .details_container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: #0269b6;
+}
+
+.back-button {
+	border: 3px solid #0269b6;
+	border-radius: 10px;
+	padding: 1%;
+	background-color: #ffca00;
+	color: #0269b6;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 .logo {

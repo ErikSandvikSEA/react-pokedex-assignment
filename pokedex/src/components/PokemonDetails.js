@@ -1,9 +1,8 @@
 //from packages
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Container from '@material-ui/core/Container'
+import { useParams, useHistory } from 'react-router-dom'
+import {CssBaseline, Container, CircularProgress} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 //from files
@@ -63,11 +62,16 @@ const useStyles = makeStyles(() => ({
 
 function PokemonDetails() {
 	const classes = useStyles()
+	const history = useHistory()
 	const { id } = useParams()
 	const detailedList = useSelector((state) => state.detailedList)
 	const [filteredPokemon] = detailedList.filter((pokemon) => {
 		return pokemon.id === parseInt(id) || pokemon.name === id
 	})
+
+	const goBack = () => {
+		history.push("/")
+	}
 
 	useEffect(() => {
 		window.scrollTo(0, 0)
@@ -110,6 +114,9 @@ function PokemonDetails() {
 							<h5>Height: {filteredPokemon.height}</h5>
 							<h5>Weight: {filteredPokemon.weight}</h5>
 						</div>
+						<button className="back-button" onClick={goBack}>
+							Back to Main List
+						</button>
 					</Container>
 					<Container maxWidth="lg" className="combatDetailsContainer">
 						<div className="moves-abilities__container">
@@ -164,7 +171,7 @@ function PokemonDetails() {
 				</div>
 			)
 		} else {
-			return <h1>Loading...</h1>
+			return <CircularProgress />
 		}
 	}
 
