@@ -110,6 +110,18 @@ li.no-bullets {
 		align-items: center;
 	}
 
+	li.no-bullets {
+		display: flex;
+		justify-content: center;
+		background-color: white;
+		width: 100%;
+		margin: 2% 0%;
+		padding: 1% 0%;
+		border: none;
+		border-radius: none;
+		font-weight: 600;
+	}
+
 	.moves-abilities__container {
 		width: 80%;
 	}
